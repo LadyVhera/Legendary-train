@@ -1,0 +1,56 @@
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/* Add your styles in styles.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    
+}
+
+#quote-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#quote-text {
+    font-size: 1.5em;
+}
+
+#author {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+}
+
+#new-quote-btn, #search-category-btn, #speak-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: purple;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+#category-selector {
+    margin-top: 10px;
+}
+.buttons{
+    border-top: 1px solid #ccc;
+    margin-top: 10px;
+  }
