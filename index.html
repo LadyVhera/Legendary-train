@@ -3,35 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./css/all.css">
     <link rel="stylesheet" href="./style.css">
+    <title>Legendary-Train</title>
 </head>
 <body>
     <div id="quote-container">
         <p id="quote-text">Loading...</p>
-        <p id="author">— Author</p>
-        <select id="category-selector">
-          <option value="inspire">Inspiration</option>
-          <option value="management">Management</option>
-          <option value="sports">Sports</option>
-          <option value="life">Life</option>
-          <option value="funny">Funny</option>
-          <option value="funny">Christain</option>
-      </select>
-        <button id="new-quote-btn">New Quote</button>
-       
-        <!-- <button id="search-category-btn">Search</button>
-        <button id="speak-btn">Speak</button>
-        <button id="speak-btn">Speak</button> -->
-        <div class="buttons">
-            <div class="features">
-              <ul>
-                <li class="speech"><i class="fas fa-volume-up"></i></li>
-                <li class="copy"><i class="fas fa-copy"></i></li>
-                <li class="twitter"><i class="fab fa-twitter"></i></li>
-              </ul>
+        <div class="name">
+          <span>_</span>
+          <p id="author"> Author</p>
+        </div>
+<!-- Slecting a text in the search button -->
+        <div class="select-search">
+          <div id = "category-selector" class="wrapper">
+            <div class="select-btn ">
+              <span>Select category</span>
+              <i class="fa-solid fa-angle-down"></i>
+            </div>
+            <div class="content">
+              <div class="search">
+                <i class="uil uil-search"></i>
+                <input spellcheck="false" type="text" placeholder="Search">
+              </div>
+              <ul class="options"></ul>
             </div>
           </div>
+          <button id="new-quote-btn">New Quote</button>
+        </div>
+        <div class="buttons">
+          <div class="features">
+            <ul>
+              <li class="speech" title="Audio"><i class="fas fa-volume-up"></i></li>
+              <li class="copy" title="Copy"><i class="fas fa-copy"></i></li>
+              <li class="twitter" title="Share"><i class="fab fa-twitter"></i></li>
+            </ul>
+            <button>Download Image</button>
+          </div>
+        </div>
     </div>
     <script src="./script.js"></script>
 </body>

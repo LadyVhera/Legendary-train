@@ -1,56 +1,102 @@
-// Add your JavaScript code in script.js
+const categorySelector = document.getElementById ('category-selector');
+     wrapper = document.querySelector(".wrapper"),
+    selectBtn = wrapper.querySelector(".select-btn"),
+    searchInp = wrapper.querySelector("input"),
+    quoteText = document.querySelector("#quote-text"),
+    quoteBtn = document.querySelector("button"),
+    authorName = document.querySelector("#author"),
+    speechBtn = document.querySelector(".speech"),
+    copyBtn = document.querySelector(".copy"),
+    twitterBtn = document.querySelector(".twitter"),
+    synth = speechSynthesis,
+    options = wrapper.querySelector(".options");
 
-const quoteText = document.getElementById('quote-text');
-const authorText = document.getElementById('author');
-const newQuoteBtn = document.getElementById('new-quote-btn');
-const categorySelector = document.getElementById('category-selector');
-const searchCategoryBtn = document.getElementById('search-category-btn');
-const speakBtn = document.getElementById('speak-btn');
+let category = [ "Adventure","Ambition","Balance", "Change", "Confidence","Creativity", "Determination", "Dreams", "Education", "Family","Forgiveness", "Gratitude", "Health", "Hope","Humor","Imagination", "Kindness", "Learning", "Love", "Mindfulness", "Optimism", "Patience", "Perseverance", "Purpose", "Resilience", "Self-Improvement","Simplicity","Teamwork", "Time Management","Vision","Wellness"];
 
-let currentQuote = {};
+function addcategory( selectedcategory ) {
+    options.innerHTML = "";
+    category.forEach(country => {
+        let isSelected = country ==  selectedcategory  ? "selected" : "";
+        let li = `<li onclick="updateName(this)" class="${isSelected}">${country}</li>`;
+        options.insertAdjacentHTML("beforeend", li);
+    });
+}
+addcategory();
 
-// Function to fetch a random quote from Quotable API
-async function fetchRandomQuote() {
+function updateName(selectedLi) {
+    searchInp.value = "";
+    addcategory(selectedLi.innerText);
+    wrapper.classList.remove("active");
+    selectBtn.firstElementChild.innerText = selectedLi.innerText;
+}
+
+searchInp.addEventListener("keyup", () => {
+    let arr = [];
+    let searchWord = searchInp.value.toLowerCase();
+    arr = category.filter(data => {
+        return data.toLowerCase().startsWith(searchWord);
+    }).map(data => {
+        let isSelected = data == selectBtn.firstElementChild.innerText ? "selected" : "";
+        return `<li onclick="updateName(this)" class="${isSelected}">${data}</li>`;
+    }).join("");
+    options.innerHTML = arr ? arr : `<p style="margin-top: 10px;">Oops! Country not found</p>`;
+});
+
+selectBtn.addEventListener("click", () => wrapper.classList.toggle("active"));
+
+//Generating a random Quote
+
+function randomQuote(){
     const category = categorySelector.value;
-    const apiUrl = `https://api.quotable.io/random?category=${category}`;
-    
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (response.ok) {
-            currentQuote = data;
-            updateQuote();
-        } else {
-            console.error('Error fetching quote:', data);
-        }
-    } catch (error) {
-        console.error('Error fetching quote:', error.message);
-    }
+    quoteBtn.classList.add("loading");
+    quoteBtn.innerText = "Loading Quote...";
+    fetch(`https://api.quotable.io/random?category=${category}`).then(response => response.json()).then(result => {
+        quoteText.innerText = result.content;
+        authorName.innerText = result.author;
+        quoteBtn.classList.remove("loading");
+        quoteBtn.innerText = "New Quote";
+    });
 }
 
-// Function to update the displayed quote
-function updateQuote() {
-    quoteText.innerText = currentQuote.content;
-    authorText.innerText = `— ${currentQuote.author}`;
-}
-
-// Event listener for the "New Quote" button
-newQuoteBtn.addEventListener('click', fetchRandomQuote);
-
-// Event listener for the "Search by Category" button
-searchCategoryBtn.addEventListener('click', fetchRandomQuote);
-
-// Event listener for the "Speak" button
-speakBtn.addEventListener('click', () => {
-    if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(`${currentQuote.content} by ${currentQuote.author}`);
-        speechSynthesis.speak(utterance);
-    } else {
-        alert('Text-to-speech is not supported in your browser.');
+speechBtn.addEventListener("click", ()=>{
+    if(!quoteBtn.classList.contains("loading")){
+        let utterance = new SpeechSynthesisUtterance(`${quoteText.innerText} by ${authorName.innerText}`);
+        synth.speak(utterance);
+        setInterval(()=>{
+            !synth.speaking ? speechBtn.classList.remove("active") : speechBtn.classList.add("active");
+        }, 10);
     }
 });
 
-// Initial quote generation
-fetchRandomQuote();
+copyBtn.addEventListener("click", ()=>{
+    navigator.clipboard.writeText(quoteText.innerText);
+});
+
+twitterBtn.addEventListener("click", ()=>{
+    let tweetUrl = `https://twitter.com/intent/tweet?url=${quoteText.innerText}`;
+    window.open(tweetUrl, "_blank");
+});
+
+quoteBtn.addEventListener("click", randomQuote);
+
+// Share
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

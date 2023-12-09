@@ -1,4 +1,3 @@
-/* Import Google Font - Poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 *{
   margin: 0;
@@ -17,40 +16,199 @@ body {
     margin: 0;
     
 }
-
 #quote-container {
+    width: 605px;
+    border-radius: 14px;
+    padding: 30px 30px 25px;
     text-align: center;
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 #quote-text {
     font-size: 1.5em;
+    word-break: break-all;
 }
-
-#author {
+.name{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+    font-style: italic;
     margin-top: 10px;
+  }
+  .name span:first-child{
+    margin: -7px 5px 0 0;
+    font-family: monospace;
+  }
+#author {
     font-style: italic;
     color: #555;
 }
-
-#new-quote-btn, #search-category-btn, #speak-btn {
-    margin-top: 10px;
+/* Styling begins for search button */
+.select-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 20px 0px 20px 0px;
+}
+.select-btn, li{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+}
+.select-btn{
+  padding: 10px 20px;
+  font-size: 1em;
+  background: #fff;
+  border-radius: 4px;
+  justify-content:space-between;
+  gap: 0.5rem;
+  outline: 1px solid #800080;
+  box-shadow: 0 10px 25px rgba(70, 68, 68, 0.1);
+}
+.select-btn i{
+  transition: transform 0.3s linear;
+}
+.wrapper.active .select-btn i{
+  transform: rotate(-180deg);
+}
+.content{
+  display: none;
+  padding: 10px 10px;
+  margin-top: 5px;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+.wrapper.active .content{
+  display: block;
+}
+.content .search{
+  position: relative;
+}
+.search i{
+  top: 50%;
+  left: 15px;
+  color: #999;
+  font-size: 1em;
+  pointer-events: none;
+  transform: translateY(-50%);
+  position: absolute;
+}
+.search input{
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1em;
+  border-radius: 5px;
+  padding: 0 10px 0 3px;
+  border: 1px solid #B3B3B3;
+}
+.search input:focus{
+  padding-left: 42px;
+  border: 2px solid #800080;
+}
+.search input::placeholder{
+  color: #bfbfbf;
+}
+.content .options{
+  margin-top: 10px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 7px;
+}
+.options::-webkit-scrollbar{
+  width: 7px;
+}
+.options::-webkit-scrollbar-track{
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb{
+  background: #ccc;
+  border-radius: 25px;
+}
+.options::-webkit-scrollbar-thumb:hover{
+  background: #b3b3b3;
+}
+.options li{
+  height: 50px;
+  padding: 0 13px;
+  font-size: 1.2em;
+}
+.options li:hover, li.selected{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  color: #000;
+}
+/* Styling ends for search button */
+.buttons{
+    border-top: 1px solid #ccc;
+  }
+#new-quote-btn {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    background-color: purple;
+    background-color: #800080;
     color: #fff;
     border: none;
     border-radius: 4px;
 }
 
-#category-selector {
-    margin-top: 10px;
-}
+/* Syling for speech, copy and share button */
 .buttons{
     border-top: 1px solid #ccc;
-    margin-top: 10px;
   }
+  .buttons .features{
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .features ul{
+    display: flex;
+  }
+  .features ul li{
+    margin: 0 5px;
+    height: 47px;
+    width: 47px;
+    display: flex;
+    cursor: pointer;
+    color: #800080;
+    list-style: none;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid #800080; */
+    transition: all 0.3s ease;
+  }
+  .features ul li:first-child{
+    margin-left: 0;
+  }
+  ul li:is(:hover, .active){
+    color: #fff;
+    background: #800080;
+  }
+  ul .speech.active{
+    pointer-events: none;
+  }
+  .buttons button{
+    border: none;
+    color: #800080;
+    outline: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 13px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    background: whitesmoke;
+  }
+  .buttons button.loading{
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Share */
